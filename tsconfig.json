@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "target": "ES2024",
+        "sourceMap": true,
+        "outDir": "dist"
+    },
+    "include": [
+        "backend/src",
+        "frontend/src"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
+// # Shared dev dependencies for TypeScript in backend + frontend
+// npm install -D typescript ts-node nodemon concurrently
+
+// # Backend dependencies
+// npm install express dotenv @supabase/supabase-js
+// npm install -D @types/express
+
+// # Frontend dependencies
+// npm install -D vite react react-dom typescript
+// npm install -D @types/react @types/react-dom
+
+// # Optional: if you're using ESLint/Prettier or other tools
+// npm install -D eslint prettier

@@ -1,8 +1,5 @@
-# Python
-__pycache__/
-
-# Virtual Environment
-venv/
-
 # .env file
 .env
+
+# node modules
+node_modules/
