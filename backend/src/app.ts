@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 
 // Import the routes
-import usersRoute from "./routes/usersRoute.js";
+import authRoute from "./routes/authRoute.js";
 import songsRoute from "./routes/songsRoute.js";
 import favoritesRoute from "./routes/favoritesRoute.js";
 import scoresRoute from "./routes/scoresRoute.js";
@@ -18,7 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 // Register the routes
-app.use("/user", usersRoute);
+app.use("/auth", authRoute);
 app.use("/song", songsRoute);
 app.use("/favorite", favoritesRoute);
 app.use("/score", scoresRoute);
