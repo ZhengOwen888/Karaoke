@@ -1,4 +1,4 @@
-import { SignUpWithPasswordCredentials } from "@supabase/supabase-js"
+import { SignUpWithPasswordCredentials } from "@supabase/supabase-js";
 import { supabase } from "../utils/supabaseClient.js";
 
 // Sign up with Supabase using email and password
@@ -23,7 +23,8 @@ export const signUpUser = async (email: string, username: string, password: stri
     };
 
     // Submit sign up credentials to be verified by Supabase
-    return await supabase.auth.signUp(signUpParam);
+    const { data, error } = await supabase.auth.signUp(signUpParam);
+    return { data, error };
 };
 
 // Login with Supabase using email and password
@@ -37,8 +38,9 @@ export const loginUser = async (email: string, password: string) => {
     };
 
     // Submit login credentials to be verified by Supabase
-    return await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
         email: email?.trim(),
         password: password?.trim()
     });
+    return { data, error };
 };

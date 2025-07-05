@@ -4,12 +4,10 @@ import cors from "cors";
 // Import the routes
 import authRoute from "./routes/authRoute.js";
 import songsRoute from "./routes/songsRoute.js";
-import favoritesRoute from "./routes/favoritesRoute.js";
-import scoresRoute from "./routes/scoresRoute.js";
 
 // Initialize the Express app
 const app = express();
-const PORT = 5000;
+const PORT = 3000;
 
 // Enable Cross Origin Resource Sharing
 app.use(cors());
@@ -19,9 +17,7 @@ app.use(express.json());
 
 // Register the routes
 app.use("/auth", authRoute);
-app.use("/song", songsRoute);
-app.use("/favorite", favoritesRoute);
-app.use("/score", scoresRoute);
+app.use("/songs", songsRoute);
 
 // Run the server
 app.listen(PORT, () => {
