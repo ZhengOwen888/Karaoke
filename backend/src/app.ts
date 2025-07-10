@@ -3,6 +3,7 @@ import cors from "cors";
 
 // Import the routes
 import authRoute from "./routes/authRoute.js";
+import profilesRoute from "./routes/profilesRoute.js";
 import songsRoute from "./routes/songsRoute.js";
 
 // Initialize the Express app
