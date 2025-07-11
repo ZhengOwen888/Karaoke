@@ -1,5 +1,6 @@
 import express, { Router, Request, Response } from "express";
-import { signUpUser, loginUser } from "../services/authServices.js"
+import { signUpUser, signInUser, signOutUser} from "../services/authServices.js"
+import { authenticateUser } from "../middleware/authenticateUser.js";
 
 // Initialize router
 const router: Router = express.Router();
@@ -7,8 +8,8 @@ const router: Router = express.Router();
 // Sign up route
 router.post("/signup", async (req: Request, res: Response) => {
     // Get credientials from request body
-    const { email, username, password } = req.body;
-    const { data, error } = await signUpUser(email, username, password);
+    const { email, password } = req.body;
+    const { data, error } = await signUpUser(email, password);
 
     // Sign up failed
     if (error) {
@@ -21,20 +22,31 @@ router.post("/signup", async (req: Request, res: Response) => {
     return;
 });
 
-// Login route
+// Sign in route
 router.post("/login", async(req: Request, res: Response) => {
     // Get credientials from request body
     const { email, password } = req.body;
-    const { data, error } = await loginUser(email, password);
+    const { data, error } = await signInUser(email, password);
 
-    // Login authentication failed
+    // Sign in authentication failed
     if (error) {
         res.status(401).json({ error: error.message });
         return;
     }
 
-    // Login authentication successful
+    // Sign in authentication successful
     res.status(200).json({ user: data.user, session: data.session });
+    return;
+});
+
+// Sign out route
+router.post("/logout", authenticateUser, async (req: Request, res: Response) => {
+    const { error } = await signOutUser();
+    if (error) {
+        res.status(500).json({ error: error.message });
+        return;
+    }
+    res.status(200).json({ message: "Successfully signed out" });
     return;
 });
 

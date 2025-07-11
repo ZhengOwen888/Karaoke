@@ -1,10 +1,14 @@
 import express, { Router, Request, Response} from "express";
-import { authenticateUser, getProfile, updateProfile } from "../services/profilesServices.js";
+import { getProfile, updateProfile } from "../services/profilesServices.js";
+import { authenticateUser } from "../middleware/authenticateUser.js";
 
 const route: Router = express.Router();
 
+// Middleware to check if user is authenticated before accessing other routes
+route.use(authenticateUser);
+
 // Get user profile
-route.get("/profile", authenticateUser, async (req: Request, res: Response) => {
+route.get("/profile", async (req: Request, res: Response) => {
     const userId = (req as any).user.id;
     const { data, error } = await getProfile(userId);
 
@@ -17,7 +21,7 @@ route.get("/profile", authenticateUser, async (req: Request, res: Response) => {
 });
 
 // Update user profile
-route.post("/profile", authenticateUser, async (req: Request, res: Response) => {
+route.post("/profile", async (req: Request, res: Response) => {
     const userId = (req as any).user.id;
     const updates = req.body;
     const { data, error } = await updateProfile(userId, updates);

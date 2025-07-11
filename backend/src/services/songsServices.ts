@@ -14,7 +14,7 @@ export const getSongs = async (filter: Record<string, string | null> ) => {
         query = query.ilike("artist", `%${filter.artist}%`);
     }
     if (filter.genre) {
-        query = query.ilike("genre", `%${filter.genre}%`);
+        query = query.eq("genre", `%${filter.genre}%`);
     }
 
     const { data, error } = await query;

@@ -19,6 +19,7 @@ app.use(express.json());
 // Register the routes
 app.use("/auth", authRoute);
 app.use("/songs", songsRoute);
+app.use("/profile", profilesRoute);
 
 // Run the server
 app.listen(PORT, () => {

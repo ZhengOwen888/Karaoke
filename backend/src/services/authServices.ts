@@ -1,34 +1,25 @@
-import { SignUpWithPasswordCredentials } from "@supabase/supabase-js";
 import { supabase } from "../utils/supabaseClient.js";
 
 // Sign up with Supabase using email and password
-export const signUpUser = async (email: string, username: string, password: string) => {
+export const signUpUser = async (email: string, password: string) => {
     // Validate required credentials
-    if (!email?.trim() || !username?.trim() || ! password?.trim()) {
+    if (!email?.trim() || ! password?.trim()) {
         return {
             data: null,
             error: new Error("Missing required information")
         };
     };
 
-    // Prepare sign-up credentials for supabase auth
-    const signUpParam: SignUpWithPasswordCredentials = {
-        email: email?.trim(),
-        password: password?.trim(),
-        options: {
-            data: {
-                username: username?.trim()
-            }
-        }
-    };
-
     // Submit sign up credentials to be verified by Supabase
-    const { data, error } = await supabase.auth.signUp(signUpParam);
+    const { data, error } = await supabase.auth.signUp({
+        email: email?.trim(),
+        password: password?.trim()
+    });
     return { data, error };
 };
 
-// Login with Supabase using email and password
-export const loginUser = async (email: string, password: string) => {
+// Sign in with Supabase using email and password
+export const signInUser = async (email: string, password: string) => {
     // Validate required credentials
     if (!email.trim() || !password.trim()) {
         return {
@@ -37,10 +28,16 @@ export const loginUser = async (email: string, password: string) => {
         };
     };
 
-    // Submit login credentials to be verified by Supabase
+    // Submit sign in credentials to be verified by Supabase
     const { data, error } = await supabase.auth.signInWithPassword({
         email: email?.trim(),
         password: password?.trim()
     });
     return { data, error };
+};
+
+// Sign out with Supabase
+export const signOutUser = async () => {
+    const { error } = await supabase.auth.signOut();
+    return { error };
 };
