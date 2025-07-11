@@ -5,6 +5,7 @@ import cors from "cors";
 import authRoute from "./routes/authRoute.js";
 import profilesRoute from "./routes/profilesRoute.js";
 import songsRoute from "./routes/songsRoute.js";
+import scoresRoute from "./routes/scoresRoute.js";
 
 // Initialize the Express app
 const app = express();
