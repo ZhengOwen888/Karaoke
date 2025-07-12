@@ -2,10 +2,12 @@ import { supabase } from "../utils/supabaseClient.js";
 
 export const getSongs = async (filter: Record<string, string | null> ) => {
 
-    let query = supabase.from("songs").select("*");
+    let query = supabase
+        .from("songs")
+        .select("*");
 
     if (filter.id) {
-        query = query.eq("song_id", filter.id);
+        query = query.eq("id", filter.id);
     }
     if (filter.title) {
         query = query.ilike("title", `%${filter.title}%`);
@@ -14,7 +16,7 @@ export const getSongs = async (filter: Record<string, string | null> ) => {
         query = query.ilike("artist", `%${filter.artist}%`);
     }
     if (filter.genre) {
-        query = query.eq("genre", `%${filter.genre}%`);
+        query = query.eq("genre", filter.genre);
     }
 
     const { data, error } = await query;

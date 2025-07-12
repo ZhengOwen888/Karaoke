@@ -8,7 +8,7 @@ const router: Router = express.Router();
 router.use(authenticateUser);
 
 // Get user profile
-router.get("/profile", async (req: Request, res: Response) => {
+router.get("/", async (req: Request, res: Response) => {
     const userId = (req as any).user.id;
     const { data, error } = await getProfile(userId);
 
@@ -21,7 +21,7 @@ router.get("/profile", async (req: Request, res: Response) => {
 });
 
 // Update user profile
-router.post("/profile", async (req: Request, res: Response) => {
+router.post("/", async (req: Request, res: Response) => {
     const userId = (req as any).user.id;
     const updates = req.body;
     const { data, error } = await updateProfile(userId, updates);
