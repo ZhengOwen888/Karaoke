@@ -7,6 +7,11 @@
   "scripts": {
     "build": "tsc"
   },
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ZhengOwen888/Karaoke.git"
