@@ -18,12 +18,14 @@ router.post("/signup", async (req: Request, res: Response) => {
     }
 
     // Sign up successful
-    res.status(201).json({ user: data.user, session: data.session });
+    if (data) {
+        res.status(201).json({ user: data.user, session: data.session });
+    }
     return;
 });
 
 // Sign in route
-router.post("/login", async(req: Request, res: Response) => {
+router.post("/login", async (req: Request, res: Response) => {
     // Get credientials from request body
     const { email, password } = req.body;
     const { data, error } = await signInUser(email, password);
@@ -35,7 +37,9 @@ router.post("/login", async(req: Request, res: Response) => {
     }
 
     // Sign in authentication successful
-    res.status(200).json({ user: data.user, session: data.session });
+    if (data) {
+        res.status(200).json({ user: data.user, session: data.session });
+    }
     return;
 });
 

@@ -7,11 +7,9 @@
         "outDir": "dist",
     },
     "include": [
-        "backend/src",
-        "frontend/src"
+        "src",
     ],
     "exclude": [
-        "node_modules",
         "dist"
     ]
 }
